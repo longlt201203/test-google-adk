@@ -1,13 +1,15 @@
 from google.adk.agents import Agent
 from .prompts import instructions
-from .tools import analyze_project_design_tool
+from .tools import load_project_design_tool, store_user_image
+from google.adk.models.lite_llm import LiteLlm
 
-AGENT_MODEL = "gemini-2.0-flash"
+# AGENT_MODEL = LiteLlm(model="claude-3-5-sonnet-latest")
+AGENT_MODEL = "gemini-2.5-flash-preview-04-17"
 
 root_agent = Agent(
     name="ba_agent",
-    description="Agent that acts as a BA in a project",
+    description="Agent that acts as a Business Analyst in a project",
     model=AGENT_MODEL,
     instruction=instructions,
-    tools=[analyze_project_design_tool],
+    tools=[load_project_design_tool, store_user_image],
 )
